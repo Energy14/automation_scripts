@@ -2,7 +2,7 @@ import pyautogui
 import time
 
 # set end date for FW tasks
-END_DATE = "20.12.2024 18:00:00"
+END_DATE = "30.01.2025 18:00:00"
 
 def pointAt(img):
     button_location = pyautogui.locateOnScreen(img, grayscale=True)
@@ -53,7 +53,11 @@ input("Assign the engineer, press enter to continue")
 time.sleep(2)
 pyautogui.click(pointAt('save_task.png'))
 time.sleep(2)
-pyautogui.click(pointAt('ok.png'))
+try:
+    pyautogui.click(pointAt('ok.png'))
+except pyautogui.ImageNotFoundException:
+    time.sleep(2)
+    pyautogui.click(pointAt('ok.png'))
 time.sleep(1)
 pyautogui.click(pointAt('back.png'))
 time.sleep(3)
@@ -119,7 +123,7 @@ time.sleep(1)
 pyautogui.click(pointAt('save_crq.png'))
 time.sleep(2)
 pyautogui.click(pointAt('yes_2.png'))
-time.sleep(1)
+time.sleep(2)
 pyautogui.scroll(200)
 pyautogui.scroll(200)
 print("Automation completed")
