@@ -1,14 +1,17 @@
+import os
 import pyautogui
 import time
 from pynput import keyboard
 
-# Set end date for FW tasks
-END_DATE = "27.02.2025 18:00:00"
+# Set end date for FW tasks 
+END_DATE = "17.04.2025 18:00:00"
+
+IMAGE_BASE_PATH = 'images/'
 
 def pointAt(img):
     while True:
         try:
-            button_location = pyautogui.locateOnScreen(img, grayscale=True)
+            button_location = pyautogui.locateOnScreen(os.path.join(IMAGE_BASE_PATH, img), grayscale=False)
             if button_location is not None:
                 return pyautogui.center(button_location)
         except pyautogui.ImageNotFoundException:
@@ -72,20 +75,20 @@ def wait_for_key_press():
 
 time.sleep(2)
 # Collect all instances of the button
-buttons = list(pyautogui.locateAllOnScreen('dropdown.png'))
+buttons = list(pyautogui.locateAllOnScreen(os.path.join(IMAGE_BASE_PATH, 'dropdown.png')))
 # assign change coordinator
 pyautogui.click(pyautogui.center(buttons[1]))
-time.sleep(1)
+time.sleep(0.4)
 pyautogui.click(pointAt('name.png'))
 # assign change manager
 pyautogui.click(pyautogui.center(buttons[2]))
-time.sleep(1)
+time.sleep(0.4)
 pyautogui.click(pointAt('name.png'))
 # Open task
 safe_click('tasks.png')
 safe_doubleClick('pmatrix_task.png')
 safe_click('save_con.png')
-time.sleep(2)
+time.sleep(1)
 ## Process task
 # Set dates
 safe_click('dates.png')
@@ -110,6 +113,7 @@ wait_for_key_press()
 
 safe_click('save_task.png')
 safe_click('ok.png')
+time.sleep(1)
 safe_click('back.png')
 time.sleep(1.5)
 # Set CRQ dates
@@ -133,7 +137,7 @@ pyautogui.write(END_DATE)
 # Move to scheduled and save
 pyautogui.moveRel(-300, 0)
 pyautogui.scroll(-200)
-time.sleep(1)  # Scroll delay
+time.sleep(1)
 pyautogui.scroll(-200)
 safe_click('next_stage.png')
 safe_click('yes.png')
@@ -144,7 +148,7 @@ safe_click('save_crq.png')
 safe_click('yes_2.png')
 
 pyautogui.moveRel(-300, 0)
-time.sleep(1)
+time.sleep(1.5)
 pyautogui.scroll(200)
 pyautogui.scroll(200)
 

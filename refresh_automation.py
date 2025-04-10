@@ -1,8 +1,11 @@
 import pyautogui
 import time
+import os
+
+IMAGE_BASE_PATH = 'images/'
 
 def pointAt(img):
-    button_location = pyautogui.locateOnScreen(img, grayscale=True)
+    button_location = pyautogui.locateOnScreen(os.path.join(IMAGE_BASE_PATH, img), grayscale=True)
     return pyautogui.center(button_location)
 
 while True:
